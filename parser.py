@@ -8,7 +8,6 @@ def process_command(user_choice):
             print("Reflecting the object...")
         case "4":
             print("Shearing the object...")
-
         case "5":
             print("Transforming with custom matrix...")
         case _:
@@ -39,10 +38,11 @@ def main():
 
         if user_choice == "m":
             print_menu()
+        elif user_choice == "e":
+            print("Okay, bye!")
+            return
         else:
             process_command(user_choice)
-    print("Okay, bye!")
-    return
 
 
 main()
