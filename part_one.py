@@ -29,6 +29,16 @@ def rotate_object(object_points):
 
 
 def scale_object(object_points):  # validation
-    scaling_coefficient = float(input("Please, enter desired scaling coefficient: "))
-    scaled_object = scaling_coefficient * object_points
+    scale_factor = float(input("Please, enter desired scaling coefficient: "))
+    scaled_object = scale_factor * object_points
     visualize_object(scaled_object)
+
+
+def reflect_object(object_points):
+    transformation_matrix_x = np.array([[1, 0], [0, -1]])
+    transformation_matrix_y = np.array([[-1, 0], [0, 1]])
+
+    reflected_x_axis = np.dot(transformation_matrix_x, object_points.T).T
+    reflected_y_axis = np.dot(transformation_matrix_y, object_points.T).T
+    visualize_object(reflected_x_axis)
+    visualize_object(reflected_y_axis)
