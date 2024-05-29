@@ -9,6 +9,13 @@ swallow = np.array(
     [[-5, 4], [-7, 4], [-9, 6], [-11, 6], [-12, 5], [-14, 5], [-12, 4], [-14, 3], [-12, 3], [-11, 2], [-10, 2],
      [-9, 1], [-9, 0], [-8, -2], [0, -3], [3, -2], [19, -2], [4, 0], [19, 4], [4, 2], [2, 3], [6, 9], [10, 11],
      [3, 11], [1, 10], [-5, 4]])
+# validation, comments
+
+
+def print_matrix(matrix, transformation_adjective):
+    print(f" {transformation_adjective} matrix: ")
+    for row in matrix:
+        print(row)
 
 
 def visualize_object(object_points):
@@ -25,12 +32,14 @@ def rotate_object(object_points):
         [[np.cos(angle_in_radians), -np.sin(angle_in_radians)],  # it works vice versa without transposing though
          [np.sin(angle_in_radians), np.cos(angle_in_radians)]])
     rotated_object = np.dot(rotation_matrix, object_points.T).T
+    print_matrix(rotated_object, "Rotated")
     visualize_object(rotated_object)
 
 
 def scale_object(object_points):  # validation
     scale_factor = float(input("Please, enter desired scaling coefficient: "))
     scaled_object = scale_factor * object_points
+    print_matrix(scaled_object, "Scaled")
     visualize_object(scaled_object)
 
 
@@ -40,7 +49,9 @@ def reflect_object(object_points):
 
     reflected_x_axis = np.dot(transformation_matrix_x, object_points.T).T
     reflected_y_axis = np.dot(transformation_matrix_y, object_points.T).T
+    print_matrix(reflected_x_axis, "Reflected relative to x-axis")
     visualize_object(reflected_x_axis)
+    print_matrix(reflected_x_axis, "Reflected relative to y-axis")
     visualize_object(reflected_y_axis)
 
 
@@ -51,7 +62,9 @@ def shear_object(object_points):
 
     sheared_x_axis = np.dot(shear_matrix_x, object_points.T).T
     sheared_y_axis = np.dot(shear_matrix_y, object_points.T).T
+    print_matrix(sheared_x_axis, "Sheared relative to x-axis")
     visualize_object(sheared_x_axis)
+    print_matrix(sheared_x_axis, "Sheared relative to y-axis")
     visualize_object(sheared_y_axis)
 
 
@@ -59,4 +72,5 @@ def transform_object(object_points):
     custom_matrix = input("Please, enter your custom 2 * n matrix: ")
     custom_matrix = np.array([list(map(float, row.split())) for row in custom_matrix.split(';')])
     transformed_object = np.dot(custom_matrix, object_points.T).T
+    print_matrix(transformed_object, "Transformed")
     visualize_object(transformed_object)
