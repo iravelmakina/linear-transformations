@@ -1,16 +1,28 @@
+from part_one import *
+
+
 def process_command(user_choice):
     match user_choice:
         case "1":
             print("Rotating the object...")
+            rotate_object(hare)
+            rotate_object(swallow)
         case "2":
             print("Scaling the object...")
+            scale_object(hare)
+            scale_object(swallow)
         case "3":
             print("Reflecting the object...")
+            reflect_object(hare)
+            reflect_object(swallow)
         case "4":
             print("Shearing the object...")
-
+            shear_object(hare)
+            shear_object(swallow)
         case "5":
             print("Transforming with custom matrix...")
+            transform_object(hare)
+            transform_object(swallow)
         case _:
             print("Unable to process the command. Please, try again.")
             return
