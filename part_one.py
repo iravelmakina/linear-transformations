@@ -42,3 +42,15 @@ def reflect_object(object_points):
     reflected_y_axis = np.dot(transformation_matrix_y, object_points.T).T
     visualize_object(reflected_x_axis)
     visualize_object(reflected_y_axis)
+
+
+def shear_object(object_points):
+    shear_factor = float(input("Please, enter desired shear coefficient: "))
+    shear_matrix_x = np.array([[1, shear_factor], [0, 1]])
+    shear_matrix_y = np.array([[1, 0], [shear_factor, 1]])
+
+    sheared_x_axis = np.dot(shear_matrix_x, object_points.T).T
+    sheared_y_axis = np.dot(shear_matrix_y, object_points.T).T
+    visualize_object(sheared_x_axis)
+    visualize_object(sheared_y_axis)
+
