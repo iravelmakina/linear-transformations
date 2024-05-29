@@ -54,3 +54,9 @@ def shear_object(object_points):
     visualize_object(sheared_x_axis)
     visualize_object(sheared_y_axis)
 
+
+def transform_object(object_points):
+    custom_matrix = input("Please, enter your custom 2 * n matrix: ")
+    custom_matrix = np.array([list(map(float, row.split())) for row in custom_matrix.split(';')])
+    transformed_object = np.dot(custom_matrix, object_points.T).T
+    visualize_object(transformed_object)
