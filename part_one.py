@@ -9,6 +9,9 @@ swallow = np.array(
     [[-5, 4], [-7, 4], [-9, 6], [-11, 6], [-12, 5], [-14, 5], [-12, 4], [-14, 3], [-12, 3], [-11, 2], [-10, 2],
      [-9, 1], [-9, 0], [-8, -2], [0, -3], [3, -2], [19, -2], [4, 0], [19, 4], [4, 2], [2, 3], [6, 9], [10, 11],
      [3, 11], [1, 10], [-5, 4]])
+
+bird = np.array([[0, 0, 0], [1, 2, 1], [2, 3, 1], [3, 3, 0], [2, 2, -1], [1, 0, -1], [0, -1, 0],
+    [-1, -2, 1], [-2, -3, 1], [-3, -3, 0], [-2, -2, -1], [-1, 0, -1], [0, 0, 0]])
 # validation, comments
 
 
@@ -19,10 +22,29 @@ def print_matrix(matrix, transformation_adjective):
 
 
 def visualize_object(object_points):
-    x_list = [coordinates[0] for coordinates in object_points]
-    y_list = [coordinates[1] for coordinates in object_points]
-    plt.plot(x_list, y_list)
-    plt.show()
+    if object_points.shape[1] == 2:
+        x_list = [coordinates[0] for coordinates in object_points]
+        y_list = [coordinates[1] for coordinates in object_points]
+        plt.plot(x_list, y_list)
+        plt.scatter(x_list, y_list)
+        plt.xlabel('X')
+        plt.ylabel('Y')
+        plt.title('2D Object')
+        plt.show()
+    elif object_points.shape[1] == 3:
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        x_list = [coordinates[0] for coordinates in object_points]
+        y_list = [coordinates[1] for coordinates in object_points]
+        z_list = [coordinates[2] for coordinates in object_points]
+        ax.plot(x_list, y_list, z_list)
+        ax.scatter(x_list, y_list, z_list)
+        ax.set_xlabel('X')
+        ax.set_ylabel('Y')
+        ax.set_zlabel('Z')
+        plt.title('3D Object')
+        plt.plot(x_list, y_list, z_list)
+        plt.show()
 
 
 def rotate_object(object_points):
@@ -37,7 +59,7 @@ def rotate_object(object_points):
 
 
 def scale_object(object_points):  # validation
-    scale_factor = float(input("Please, enter desired scaling coefficient: "))
+    scale_factor = float(input("Please, enter desired scaling coefficient: "))  # validation
     scaled_object = scale_factor * object_points
     print_matrix(scaled_object, "Scaled")
     visualize_object(scaled_object)
@@ -56,7 +78,7 @@ def reflect_object(object_points):
 
 
 def shear_object(object_points):
-    shear_factor = float(input("Please, enter desired shear coefficient: "))
+    shear_factor = float(input("Please, enter desired shear coefficient: "))  # validation
     shear_matrix_x = np.array([[1, shear_factor], [0, 1]])
     shear_matrix_y = np.array([[1, 0], [shear_factor, 1]])
 
@@ -69,7 +91,7 @@ def shear_object(object_points):
 
 
 def transform_object(object_points):
-    custom_matrix = input("Please, enter your custom 2 * n matrix: ")
+    custom_matrix = input("Please, enter your custom 2 * n matrix: ") # validation
     custom_matrix = np.array([list(map(float, row.split())) for row in custom_matrix.split(';')])
     transformed_object = np.dot(custom_matrix, object_points.T).T
     print_matrix(transformed_object, "Transformed")
