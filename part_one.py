@@ -26,3 +26,9 @@ def rotate_object(object_points):
          [np.sin(angle_in_radians), np.cos(angle_in_radians)]])
     rotated_object = np.dot(rotation_matrix, object_points.T).T
     visualize_object(rotated_object)
+
+
+def scale_object(object_points):  # validation
+    scaling_coefficient = float(input("Please, enter desired scaling coefficient: "))
+    scaled_object = scaling_coefficient * object_points
+    visualize_object(scaled_object)
