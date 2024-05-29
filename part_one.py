@@ -17,3 +17,12 @@ def visualize_object(object_points):
     plt.plot(x_list, y_list)
     plt.show()
 
+
+def rotate_object(object_points):
+    angle_in_degrees = input("Please, enter angle for rotation: ")  # validation
+    angle_in_radians = float(angle_in_degrees) * np.pi / 180
+    rotation_matrix = np.array(
+        [[np.cos(angle_in_radians), -np.sin(angle_in_radians)],  # it works vice versa without transposing though
+         [np.sin(angle_in_radians), np.cos(angle_in_radians)]])
+    rotated_object = np.dot(rotation_matrix, object_points.T).T
+    visualize_object(rotated_object)
