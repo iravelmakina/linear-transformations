@@ -13,7 +13,7 @@ swallow = np.array(
 shape = np.array([[0, 0, 0], [1, 2, 1], [2, 3, 1], [3, 3, 0], [2, 2, -1], [1, 0, -1], [0, -1, 0],
                   [-1, -2, 1], [-2, -3, 1], [-3, -3, 0], [-2, -2, -1], [-1, 0, -1], [0, 0, 0]])
 
-object_dict = {"hare": hare, "swallow": swallow, "bird": shape}
+object_dict = {"hare": hare, "swallow": swallow, "shape": shape}
 
 
 def ask_and_validate_coefficient(prompt):
@@ -61,7 +61,6 @@ def is_valid_matrix(matrix, dimension):
     return True
 
 
-# func to choose object
 def ask_and_validate_object(object_dict, prompt):
     object_choice = input(f"Please, choose the object you want to {prompt}: ").lower()
     while object_choice not in ["hare", "swallow", "bird"]:
