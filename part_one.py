@@ -19,10 +19,18 @@ object_dict = {"hare": hare, "swallow": swallow, "bird": bird}
 # func to validate integer input
 def ask_and_validate_input(prompt):
     value = input(f"Please, enter {prompt}: ").lower()
-    while not value.isdigit():
+    while not is_float(value): 
         print("Invalid input. Please, try again: ")
         value = input(f"Please, enter {prompt}: ").lower()
-    return value
+    return float(value)
+
+
+def is_float(value):
+    try:
+        float(value)
+        return True
+    except ValueError:
+        return False
 
 
 # func to choose object
@@ -30,7 +38,7 @@ def choose_object(object_dict, prompt):
     object_choice = input(f"Please, choose the object you want to {prompt}: ").lower()
     while object_choice not in ["hare", "swallow", "bird"]:
         print("Invalid input. Please, try again: ")
-        object_choice = input("Please, choose the object you want to {prompt}: ").lower()
+        object_choice = input(f"Please, choose the object you want to {prompt}: ").lower()
     return object_dict[object_choice]
 
 
@@ -83,13 +91,12 @@ def print_and_visualize(matrix, transformation_adjective):
 def rotate_object():
     object_points = choose_object(object_dict, "rotate")
     angle_in_degrees = ask_and_validate_input("angle")
-    angle_in_radians = float(angle_in_degrees) * np.pi / 180
+    angle_in_radians = angle_in_degrees * np.pi / 180
 
     if is_2d_object(object_points):
         rotation_matrix = np.array([[np.cos(angle_in_radians), -np.sin(angle_in_radians)],
                                     [np.sin(angle_in_radians), np.cos(angle_in_radians)]])
         rotated_object = np.dot(rotation_matrix, object_points.T).T
-        print_and_visualize(rotated_object, "Rotated")
     elif is_3d_object(object_points):
         axis = input("Please, choose the axis you want to rotate the object around (x, y, z): ").lower()
         while axis not in ["x", "y", "z"]:
@@ -108,12 +115,11 @@ def rotate_object():
             rotation_matrix = np.array([[np.cos(angle_in_radians), -np.sin(angle_in_radians), 0],
                                       [np.sin(angle_in_radians), np.cos(angle_in_radians), 0],
                                       [0, 0, 1]])
-
         rotated_object = np.dot(rotation_matrix, object_points.T).T
-        print_and_visualize(rotated_object, "Rotated")
     else:
         print("Rotation for such an object is not supported.")
         return
+    print_and_visualize(rotated_object, "Rotated")
 
 
 def scale_object():
@@ -123,15 +129,35 @@ def scale_object():
     print_and_visualize(scaled_object, "Scaled") # OK
 
 
-def reflect_object(object_points):
-    transformation_matrix_x = np.array([[1, 0], [0, -1]])
-    transformation_matrix_y = np.array([[-1, 0], [0, 1]])
+def reflect_object():
+    object_points = choose_object(object_dict, "reflect")
+    if is_2d_object(object_points):
+        axis = input("Please, choose the axis you want to reflect the object relative to (x, y): ").lower()
+        while axis not in ["x", "y"]:
+            print("Invalid input. Please, try again: ")
+            axis = input("Please, choose the axis you want to reflect the object relative to (x, y): ").lower()
 
-    reflected_x_axis = np.dot(transformation_matrix_x, object_points.T).T
-    reflected_y_axis = np.dot(transformation_matrix_y, object_points.T).T
-    print_matrix(reflected_x_axis, "Reflected relative to x-axis")
-    visualize_object(reflected_x_axis)
-    print_and_visualize(reflected_y_axis, "Reflected relative to y-axis")
+        if axis == "x":
+            transformation_matrix = np.array([[1, 0], [0, -1]])
+        else:
+            transformation_matrix = np.array([[-1, 0], [0, 1]])
+    elif is_3d_object(object_points):
+        axis = input("Please, choose the axis you want to reflect the object relative to (x, y, z): ").lower()
+        while axis not in ["x", "y", "z"]:
+            print("Invalid input. Please, try again: ")
+            axis = input("Please, choose the axis you want to reflect the object relative to (x, y, z): ").lower()
+
+        if axis == "x":
+            transformation_matrix = np.array([[1, 0, 0], [0, -1, 0], [0, 0, -1]])
+        elif axis == "y":
+            transformation_matrix = np.array([[-1, 0, 0], [0, 1, 0], [0, 0, -1]])
+        else:
+            transformation_matrix = np.array([[-1, 0, 0], [0, -1, 0], [0, 0, 1]])
+    else:
+        print("Reflection for such an object is not supported.")
+        return
+    reflected_object = np.dot(transformation_matrix, object_points.T).T
+    print_and_visualize(reflected_object, f"Reflected relative to {axis}-axis")
 
 
 def shear_object(object_points):
