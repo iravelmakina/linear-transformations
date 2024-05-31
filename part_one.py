@@ -17,9 +17,9 @@ object_dict = {"hare": hare, "swallow": swallow, "bird": bird}
 
 
 # func to validate integer input
-def ask_and_validate_input(prompt):
+def ask_and_validate_coefficient(prompt):
     value = input(f"Please, enter {prompt}: ").lower()
-    while not is_float(value): 
+    while not is_float(value):
         print("Invalid input. Please, try again: ")
         value = input(f"Please, enter {prompt}: ").lower()
     return float(value)
@@ -90,7 +90,7 @@ def print_and_visualize(matrix, transformation_adjective):
 
 def rotate_object():
     object_points = choose_object(object_dict, "rotate")
-    angle_in_degrees = ask_and_validate_input("angle")
+    angle_in_degrees = ask_and_validate_coefficient("angle")
     angle_in_radians = angle_in_degrees * np.pi / 180
 
     if is_2d_object(object_points):
@@ -124,7 +124,7 @@ def rotate_object():
 
 def scale_object():
     object_points = choose_object(object_dict, "scale")
-    scale_factor = ask_and_validate_input("scale factor")
+    scale_factor = ask_and_validate_coefficient("scale factor")
     scaled_object = scale_factor * object_points
     print_and_visualize(scaled_object, "Scaled") # OK
 
@@ -160,20 +160,33 @@ def reflect_object():
     print_and_visualize(reflected_object, f"Reflected relative to {axis}-axis")
 
 
-def shear_object(object_points):
-    shear_factor = ask_and_validate_input("shear factor")
-    shear_matrix_x = np.array([[1, shear_factor], [0, 1]])
-    shear_matrix_y = np.array([[1, 0], [shear_factor, 1]])
+def shear_object():
+    object_points = choose_object(object_dict, "shear")
+    shear_factor = ask_and_validate_coefficient("shear factor")
+    if is_2d_object(object_points):
+        axis = input("Please, choose the axis you want to shear the object relative to (x, y): ").lower()
+        while axis not in ["x", "y"]:
+            print("Invalid input. Please, try again: ")
+            axis = input("Please, choose the axis you want to shear the object relative to (x, y): ").lower()
 
-    sheared_x_axis = np.dot(shear_matrix_x, object_points.T).T
-    sheared_y_axis = np.dot(shear_matrix_y, object_points.T).T
-    print_matrix(sheared_x_axis, "Sheared relative to x-axis")
-    visualize_object(sheared_x_axis)
-    print_and_visualize(sheared_y_axis, "Sheared relative to y-axis")
+        if axis == "x":
+            shear_matrix = np.array([[1, shear_factor], [0, 1]])
+        else:
+            shear_matrix = np.array([[1, 0], [shear_factor, 1]])
+    elif is_3d_object(object_points):
+        axis = input("Please, choose the axis you want to shear the object relative to (x, y, z): ").lower()
+        while axis not in ["x", "y", "z"]:
+            print("Invalid input. Please, try again: ")
+            axis = input("Please, choose the axis you want to shear the object relative to (x, y, z): ").lower()
 
-
-def transform_object(object_points):
-    custom_matrix = input("Please, enter your custom 2 * n matrix: ")  # validation
-    custom_matrix = np.array([list(map(float, row.split())) for row in custom_matrix.split(';')])
-    transformed_object = np.dot(custom_matrix, object_points.T).T
-    print_and_visualize(transformed_object, "Transformed")
+        if axis == "x":
+            shear_matrix = np.array([[1, shear_factor, shear_factor], [0, 1, 0], [0, 0, 1]])
+        elif axis == "y":
+            shear_matrix = np.array([[1, 0, 0], [shear_factor, 1, shear_factor], [0, 0, 1]])
+        else:
+            shear_matrix = np.array([[1, 0, 0], [0, 1, 0], [shear_factor, shear_factor, 1]])
+    else:
+        print("Shearing for such an object is not supported.")
+        return
+    sheared_object = np.dot(shear_matrix, object_points.T).T
+    print_and_visualize(sheared_object, f"Sheared relative to {axis}-axis")
