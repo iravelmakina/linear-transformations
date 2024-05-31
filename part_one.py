@@ -63,7 +63,7 @@ def is_valid_matrix(matrix, dimension):
 
 def ask_and_validate_object(object_dict, prompt):
     object_choice = input(f"Please, choose the object you want to {prompt}: ").lower()
-    while object_choice not in ["hare", "swallow", "bird"]:
+    while object_choice not in ["hare", "swallow", "shape"]:
         print("Invalid input. Please, try again: ")
         object_choice = input(f"Please, choose the object you want to {prompt}: ").lower()
     return object_dict[object_choice] # OK
