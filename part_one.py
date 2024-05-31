@@ -22,7 +22,7 @@ def ask_and_validate_coefficient(prompt):
     while not is_float(value):
         print("Invalid input. Please, try again: ")
         value = input(f"Please, enter {prompt}: ").lower()
-    return float(value)
+    return float(value) # OK
 
 
 def is_float(value):
@@ -31,6 +31,25 @@ def is_float(value):
         return True
     except ValueError:
         return False
+
+
+def ask_and_validate_matrix(prompt, dimension):
+    matrix = input(f"Please, enter your custom {prompt} matrix (rows separated by ';'): ")
+    while not is_valid_matrix(matrix, dimension):
+        print("Invalid input. Please, try again: ")
+        matrix = input(f"Please, enter your custom {prompt} matrix: ")
+    return np.array([list(map(float, row.split())) for row in matrix.split(';')])
+
+
+def is_valid_matrix(matrix, dimension):
+    rows = matrix.split(';')
+    for row in rows:
+        if len(elements := row.split()) != dimension:
+            return False
+        for element in elements:
+            if not is_float(element):
+                return False
+    return True
 
 
 # func to choose object
@@ -190,3 +209,16 @@ def shear_object():
         return
     sheared_object = np.dot(shear_matrix, object_points.T).T
     print_and_visualize(sheared_object, f"Sheared relative to {axis}-axis")
+
+
+def transform_object():
+    object_points = choose_object(object_dict, "transform")
+    if is_2d_object(object_points):
+        custom_matrix = ask_and_validate_matrix("n * 2", 2)
+    elif is_3d_object(object_points):
+        custom_matrix = ask_and_validate_matrix("n * 3", 3)
+    else:
+        print("Transformation for such an object is not supported.")
+        return
+    transformed_object = np.dot(custom_matrix, object_points.T).T
+    print_and_visualize(transformed_object, "Transformed")
