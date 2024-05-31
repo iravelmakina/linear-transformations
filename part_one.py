@@ -16,13 +16,12 @@ shape = np.array([[0, 0, 0], [1, 2, 1], [2, 3, 1], [3, 3, 0], [2, 2, -1], [1, 0,
 object_dict = {"hare": hare, "swallow": swallow, "bird": shape}
 
 
-# func to validate integer input
 def ask_and_validate_coefficient(prompt):
     value = input(f"Please, enter {prompt}: ").lower()
     while not is_float(value):
         print("Invalid input. Please, try again: ")
         value = input(f"Please, enter {prompt}: ").lower()
-    return float(value)  # OK
+    return float(value)
 
 
 def is_float(value):
@@ -30,7 +29,7 @@ def is_float(value):
         float(value)
         return True
     except ValueError:
-        return False  # OK
+        return False
 
 
 def ask_and_validate_axis(prompt, object_3d=False):
@@ -40,7 +39,7 @@ def ask_and_validate_axis(prompt, object_3d=False):
     while axis not in valid_axes:
         print("Invalid input. Please, try again: ")
         axis = input(f"Please, choose the axis you want to {prompt} the object relative to ({axes}): ").lower()
-    return axis  # OK
+    return axis
 
 
 def ask_and_validate_matrix(prompt, dimension):
@@ -48,7 +47,7 @@ def ask_and_validate_matrix(prompt, dimension):
     while not is_valid_matrix(matrix, dimension):
         print("Invalid input. Please, try again: ")
         matrix = input(f"Please, enter your custom {prompt} matrix: ")
-    return np.array([list(map(float, row.split())) for row in matrix.split(';')])  # OK
+    return np.array([list(map(float, row.split())) for row in matrix.split(';')])
 
 
 def is_valid_matrix(matrix, dimension):
@@ -59,7 +58,7 @@ def is_valid_matrix(matrix, dimension):
         for element in elements:
             if not is_float(element):
                 return False
-    return True  # OK
+    return True
 
 
 # func to choose object
@@ -82,7 +81,7 @@ def is_3d_object(object_points):
 def print_matrix(matrix, transformation_adjective):
     print(f"{transformation_adjective} matrix: ")
     for row in matrix:
-        print(row) # OK
+        print(row)
 
 
 def visualize_object(object_points):
@@ -107,14 +106,12 @@ def visualize_object(object_points):
         plt.title('3D Object')
         plt.show()
     else:
-        print("Visualization for such an object is not supported.")  # OK
+        print("Visualization for such an object is not supported.")
 
 
 def print_and_visualize(matrix, transformation_adjective):
     print_matrix(matrix, transformation_adjective)
-    visualize_object(matrix) # OK
-
-# ----------------------------------------------------------------------------------------------------------------------
+    visualize_object(matrix)
 
 
 def rotate_object():
