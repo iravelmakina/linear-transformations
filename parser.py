@@ -1,16 +1,23 @@
+from part_one import *
+
+
 def process_command(user_choice):
     match user_choice:
         case "1":
-            print("Rotating the object...")
+            print("Let's rotate the object!")
+            rotate_object()
         case "2":
-            print("Scaling the object...")
+            print("Let's scale the object!")
+            scale_object()
         case "3":
-            print("Reflecting the object...")
+            print("Let's reflect the object!")
+            reflect_object()
         case "4":
-            print("Shearing the object...")
-
+            print("Let's shear the object!")
+            shear_object()
         case "5":
-            print("Transforming with custom matrix...")
+            print("Let's transform object with custom matrix!")
+            transform_object()
         case _:
             print("Unable to process the command. Please, try again.")
             return
@@ -30,14 +37,15 @@ def is_valid_input(user_choice):
 
 def main():
     print("Welcome to object transformer! Enter 'm' to see all the commands and 'e' to exit")
-    user_choice = ""
-    while user_choice != "e":
+    while True:
         user_choice = (input("Please, choose your command: ")).lower()
         while not is_valid_input(user_choice):
             print("Invalid input. Please, try again: ")
             user_choice = (input("Please, choose your command: ")).lower()
 
-        if user_choice == "m":
+        if user_choice == "e":
+            break
+        elif user_choice == "m":
             print_menu()
         else:
             process_command(user_choice)
