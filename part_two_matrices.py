@@ -46,3 +46,23 @@ def transform_points_cv(points, custom_matrix):
     points_homogeneous = np.hstack([points, np.ones((points.shape[0], 1))])
     transformed_points = cv.transform(np.array([points_homogeneous]), custom_matrix)
     return transformed_points[0]
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+rotated_hare = rotate_points_cv(obj.hare, 45)
+part_one.print_and_visualize(rotated_hare, "Rotated")
+
+scaled_swallow = scale_points_cv(obj.swallow, 1.5)
+part_one.print_and_visualize(scaled_swallow, "Scaled Hare")
+
+reflected_hare = reflect_points_cv(obj.hare, "y")
+part_one.print_and_visualize(reflected_hare, "Reflected Hare")
+
+sheared_swallow = shear_points_cv(obj.swallow, 0.5, "x")
+part_one.print_and_visualize(sheared_swallow, "Sheared Hare")
+
+custom_matrix = np.array([[0.5, 0.5], [0, 1]])  # Example custom transformation matrix
+transformed_hare = transform_points_cv(obj.hare, custom_matrix)
+part_one.print_and_visualize(transformed_hare, "Custom Transformed Hare")
+
