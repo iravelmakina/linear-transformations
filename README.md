@@ -1,4 +1,4 @@
-# Linear Transformation Program Readme
+# Linear Transformation Program
 
 This repository contains a Python program for performing linear transformations on objects in two-dimensional and three-dimensional spaces.
 
