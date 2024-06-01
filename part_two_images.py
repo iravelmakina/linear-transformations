@@ -44,4 +44,21 @@ def shear_image(image, shear_factor, axis):
     sheared_image = cv.warpAffine(image, shearing_matrix, (w, h))
     return sheared_image
 
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+rotated_image = rotate_image(image, 45)
+scaled_image = scale_image(image, 1.5)
+reflected_image_x = reflect_image(image, "x")
+reflected_image_y = reflect_image(image, "y")
+sheared_image_x = shear_image(image, 0.5, "x")
+sheared_image_y = shear_image(image, 0.5,  "y")
+
+display_and_close("Original image", image)
+display_and_close('Rotated Image', rotated_image)
+display_and_close('Scaled Image', scaled_image)
+display_and_close('Reflected Image (relative to x-axis)', reflected_image_x)
+display_and_close('Reflected Image (relative to y-axis)', reflected_image_y)
+display_and_close('Sheared Image (relative to x-axis)', sheared_image_x)
+display_and_close('Sheared Image (relative to y-axis)', sheared_image_y)
 
