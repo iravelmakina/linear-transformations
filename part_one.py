@@ -68,7 +68,8 @@ def is_3d_object(object_points):
 def print_matrix(matrix, transformation_adjective):
     print(f"{transformation_adjective} matrix: ")
     for row in matrix:
-        print(row)
+        formatted_row = [round(float(element), 8) for element in row]
+        print(formatted_row)
 
 
 def visualize_object(object_points):

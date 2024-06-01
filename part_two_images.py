@@ -33,6 +33,9 @@ def reflect_image(image, axis):
             np.array([[1, 0, 0], [0, -1, h]], dtype=np.float32))
     elif axis == "y":
         reflection_matrix = np.array([[-1, 0, w], [0, 1, 0]], dtype=np.float32)
+    else:
+        print("Invalid axis.")
+        return
     reflected_image = cv.warpAffine(image, reflection_matrix, (w, h))
     return reflected_image
 
@@ -42,6 +45,9 @@ def shear_image(image, shear_factor, axis):
         shearing_matrix = np.array([[1, shear_factor, 0], [0, 1, 0]], dtype=np.float32)
     elif axis == "y":
         shearing_matrix = np.array([[1, 0, 0], [shear_factor, 1, 0]], dtype=np.float32)
+    else:
+        print("Invalid axis.")
+        return
     sheared_image = cv.warpAffine(image, shearing_matrix, (w, h))
     return sheared_image
 
