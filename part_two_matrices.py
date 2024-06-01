@@ -6,8 +6,6 @@ import objects as obj
 
 
 def rotate_points_cv(points, angle, center=None):
-    if center is None:
-        center = (np.mean(points[:, 0]), np.mean(points[:, 1]))
     rotation_matrix = cv.getRotationMatrix2D(center, -angle, 1)
     points_homogeneous = np.hstack([points, np.ones((points.shape[0], 1))])
     rotated_points = cv.transform(np.array([points_homogeneous]), rotation_matrix)
@@ -51,18 +49,18 @@ def transform_points_cv(points, custom_matrix):
 
 
 rotated_hare = rotate_points_cv(obj.hare, 45)
-part_one.print_and_visualize(rotated_hare, "Rotated")
+part_one.print_and_visualize(rotated_hare, "Rotated Hare")
 
-scaled_swallow = scale_points_cv(obj.swallow, 1.5)
-part_one.print_and_visualize(scaled_swallow, "Scaled Hare")
+scaled_swallow = scale_points_cv(obj.swallow, 10)
+part_one.print_and_visualize(scaled_swallow, "Scaled Swallow")
 
 reflected_hare = reflect_points_cv(obj.hare, "y")
 part_one.print_and_visualize(reflected_hare, "Reflected Hare")
 
 sheared_swallow = shear_points_cv(obj.swallow, 0.5, "x")
-part_one.print_and_visualize(sheared_swallow, "Sheared Hare")
+part_one.print_and_visualize(sheared_swallow, "Sheared Swallow")
 
-custom_matrix = np.array([[0.5, 0.5], [0, 1]])  # Example custom transformation matrix
+custom_matrix = np.array([[2, 3], [4, 5], [-2, 4]])  # Example custom transformation matrix
 transformed_hare = transform_points_cv(obj.hare, custom_matrix)
 part_one.print_and_visualize(transformed_hare, "Custom Transformed Hare")
 
