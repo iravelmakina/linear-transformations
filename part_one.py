@@ -1,19 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-hare = np.array(
-    [[5, 1], [6, 2], [6, 3], [5, 6], [4, 7], [5, 8], [6, 8], [8, 9], [9, 9], [7, 8], [9, 8], [6, 7], [7, 6], [9, 6],
-     [11, 5], [12, 3], [12, 2], [13, 3], [12, 1], [7, 1], [8, 2], [9, 2], [8, 3], [6, 1], [5, 1]])
-
-swallow = np.array(
-    [[-5, 4], [-7, 4], [-9, 6], [-11, 6], [-12, 5], [-14, 5], [-12, 4], [-14, 3], [-12, 3], [-11, 2], [-10, 2],
-     [-9, 1], [-9, 0], [-8, -2], [0, -3], [3, -2], [19, -2], [4, 0], [19, 4], [4, 2], [2, 3], [6, 9], [10, 11],
-     [3, 11], [1, 10], [-5, 4]])
-
-shape = np.array([[0, 0, 0], [1, 2, 1], [2, 3, 1], [3, 3, 0], [2, 2, -1], [1, 0, -1], [0, -1, 0],
-                  [-1, -2, 1], [-2, -3, 1], [-3, -3, 0], [-2, -2, -1], [-1, 0, -1], [0, 0, 0]])
-
-object_dict = {"hare": hare, "swallow": swallow, "shape": shape}
+import objects as obj
 
 
 def ask_and_validate_coefficient(prompt):
@@ -66,7 +54,7 @@ def ask_and_validate_object(object_dict, prompt):
     while object_choice not in ["hare", "swallow", "shape"]:
         print("Invalid input. Please, try again: ")
         object_choice = input(f"Please, choose the object you want to {prompt}: ").lower()
-    return object_dict[object_choice] # OK
+    return object_dict[object_choice]
 
 
 def is_2d_object(object_points):
@@ -80,7 +68,8 @@ def is_3d_object(object_points):
 def print_matrix(matrix, transformation_adjective):
     print(f"{transformation_adjective} matrix: ")
     for row in matrix:
-        print(row)
+        formatted_row = [round(float(element), 8) for element in row]
+        print(formatted_row)
 
 
 def visualize_object(object_points):
@@ -113,8 +102,11 @@ def print_and_visualize(matrix, transformation_adjective):
     visualize_object(matrix)
 
 
+# ----------------------------------------------------------------------------------------------------------------------
+
+
 def rotate_object():
-    object_points = ask_and_validate_object(object_dict, "rotate")
+    object_points = ask_and_validate_object(obj.object_dict, "rotate")
     angle_in_degrees = ask_and_validate_coefficient("angle")
     angle_in_radians = angle_in_degrees * np.pi / 180
 
@@ -144,14 +136,14 @@ def rotate_object():
 
 
 def scale_object():
-    object_points = ask_and_validate_object(object_dict, "scale")
+    object_points = ask_and_validate_object(obj.object_dict, "scale")
     scale_factor = ask_and_validate_coefficient("scale factor")
     scaled_object = scale_factor * object_points
-    print_and_visualize(scaled_object, "Scaled") # OK
+    print_and_visualize(scaled_object, "Scaled")
 
 
 def reflect_object():
-    object_points = ask_and_validate_object(object_dict, "reflect")
+    object_points = ask_and_validate_object(obj.object_dict, "reflect")
     if is_2d_object(object_points):
         axis = ask_and_validate_axis("reflect")
         if axis == "x":
@@ -174,7 +166,7 @@ def reflect_object():
 
 
 def shear_object():
-    object_points = ask_and_validate_object(object_dict, "shear")
+    object_points = ask_and_validate_object(obj.object_dict, "shear")
     shear_factor = ask_and_validate_coefficient("shear factor")
     if is_2d_object(object_points):
         axis = ask_and_validate_axis("shear")
@@ -198,7 +190,7 @@ def shear_object():
 
 
 def transform_object():
-    object_points = ask_and_validate_object(object_dict, "transform")
+    object_points = ask_and_validate_object(obj.object_dict, "transform")
     if is_2d_object(object_points):
         custom_matrix = ask_and_validate_matrix("n * 2", 2)
     elif is_3d_object(object_points):
