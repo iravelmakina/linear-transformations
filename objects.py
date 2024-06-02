@@ -13,3 +13,5 @@ shape = np.array([[0, 0, 0], [1, 2, 1], [2, 3, 1], [3, 3, 0], [2, 2, -1], [1, 0,
                   [-1, -2, 1], [-2, -3, 1], [-3, -3, 0], [-2, -2, -1], [-1, 0, -1], [0, 0, 0]])
 
 object_dict = {"hare": hare, "swallow": swallow, "shape": shape}
+
+image_path = "brain.jpg"
