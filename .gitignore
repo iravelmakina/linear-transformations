@@ -1,0 +1,18 @@
+# Ignore everything in .idea
+.idea/
+
+# macOS system files
+.DS_Store
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Python compiled files
+*.pyc
+__pycache__/
+
+# Other temporary files
+*.swp
+*.bak
+*.~lock.*
