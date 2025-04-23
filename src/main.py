@@ -1,4 +1,4 @@
-from parser import *
+from src.parser.parser import *
 
 
 def main():

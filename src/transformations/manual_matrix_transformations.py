@@ -1,4 +1,4 @@
-from transformations_validation_visualzation import *
+from .transformations_validation_visualization import *
 
 
 def rotate_object(object_points, angle_in_degrees):
