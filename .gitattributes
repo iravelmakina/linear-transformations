@@ -1,0 +1,11 @@
+# Python scripts
+*.py text eol=lf
+
+# Images
+*.png binary
+*.jpg binary
+*.jpeg binary
+
+# Text files
+*.txt text eol=lf
+*.md text eol=lf
