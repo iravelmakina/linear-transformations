@@ -1,57 +1,135 @@
 # Linear Transformation Program
 
-This repository contains a Python program for performing linear transformations on objects in two-dimensional and three-dimensional spaces.
+This repository contains a modular Python program for performing and visualizing linear transformations in both 2D and 3D spaces, including transformation of objects and images using both custom NumPy logic and OpenCV utilities.
 
-## Part One
+---
 
-### Features
-- **Object Creation and Visualization**
-  - Create and visualize two different objects using NumPy and Matplotlib.
-  - Objects should be distinct for clear observation of transformation effects.
+## Project Overview
 
-- **Implementation of Linear Transformations**
-  - Rotation of objects by a specified angle.
-  - Scaling of objects by a specified factor.
-  - Reflection of objects about a specified axis.
-  - Shearing of objects along a specified axis.
-  - Implementation of custom transformations using custom transformation matrices.
+This project is divided into two parts:
 
-- **Experimentation and Conclusion**
-  - Experiment with different transformation matrices.
-  - Document observations and conclusions regarding the impact of matrix elements on transformations.
+### Part One: Manual Linear Transformations with NumPy
 
-- **Extension to Three-Dimensional Space**
-  - Experiment with linear transformations in three-dimensional space.
-  - Apply at least two different transformations to a three-dimensional object.
+A matrix-based approach using NumPy and Matplotlib to apply transformations to 2D and 3D objects.
 
-## Part Two
+#### Features
+- Object Visualization
+  - Predefined 2D and 3D shapes (e.g., hare, swallow, custom shape)
+  - Visualization using Matplotlib for clear transformation output
+- Transformations Supported
+  - Rotation
+  - Scaling
+  - Reflection
+  - Shearing
+  - Custom transformation matrices
+- 3D Support
+  - All transformations extended to 3D with visual feedback
+- Educational Focus
+  - Useful for exploring how matrix elements affect spatial transformations
 
-### Features
-- **Selection of Library**
-  - Choose OpenCV for its comprehensive toolkit for linear transformations.
+---
 
-- **Implementation of Linear Transformations**
-  - Implement all linear transformations using OpenCV.
-  - Compare results obtained using predefined functions with those from custom functions.
+### Part Two: Image & Object Transformations with OpenCV
 
-- **Application on Images**
-  - Read a sample image using OpenCV.
-  - Apply two to three linear transformations to the image.
-  - Display the resulting images.
+Using OpenCV to perform fast and visually intuitive transformations on both object coordinates and images.
 
-## Usage Instructions
+#### Features
+- OpenCV Integration
+  - Uses `cv.getRotationMatrix2D` and `cv.warpAffine` for image and point transformations
+- Image Transformation Pipeline
+  - Load sample image (e.g., `assets/brain.jpg`)
+  - Apply transformations (rotate, scale, reflect, shear)
+  - Display modified images using Matplotlib
+- Object Transformation (OpenCV-based)
+  - Coordinate transformation using homogeneous matrix operations
 
-1. Clone the repository to your local machine.
-2. Install the required libraries specified.
-3. Run the program according to the instructions provided in the respective parts.
+---
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/iravelmakina/linear-transformations.git
+cd linear-transformations
+```
+
+### 2. Set up a virtual environment (optional but recommended)
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Or install individually:
+
+```bash
+pip install numpy matplotlib opencv-python
+```
+
+---
+
+## Project Structure
+
+```
+linear-transformations/
+├── src/
+│   ├── main.py
+│   ├── objects.py
+│   ├── parser/
+│   │   ├── parser.py
+│   │   └── parser_validation.py
+│   ├── transformations/
+│   │   ├── manual_matrix_transformations.py
+│   │   ├── cv_matrix_transformations.py
+│   │   ├── cv_image_transformations.py
+│   │   └── transformations_validation_visualization.py
+├── assets/
+│   └── brain.jpg
+├── requirements.txt
+├── .gitattributes
+├── .gitignore
+└── README.md
+```
+
+---
+
+## Usage
+
+Run the program from the project root:
+
+```bash
+python src/main.py
+```
+
+Follow the terminal prompts to:
+- Select between manual and OpenCV transformation modes
+- Choose between object or image processing
+- Apply transformations and view the results
+
+---
 
 ## Dependencies
 
 - Python 3.x
 - NumPy
-- Matplotlib (Part One)
-- OpenCV (Part Two)
+- Matplotlib
+- OpenCV (`opencv-python`)
+
+---
 
 ## Contributors
 
-- @iravelmakina
+- [@iravelmakina](https://github.com/iravelmakina)
+
+---
+
+## License
+
+This project is open-source under the **MIT License**.
