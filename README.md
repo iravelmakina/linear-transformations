@@ -124,12 +124,12 @@ Follow the terminal prompts to:
 
 ---
 
-## Contributors
+## License
 
-- [@iravelmakina](https://github.com/iravelmakina)
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
-## License
+## Contributor
 
-This project is open-source under the **MIT License**.
+- [@iravelmakina](https://github.com/iravelmakina)
